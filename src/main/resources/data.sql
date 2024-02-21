@@ -33,3 +33,4 @@ INSERT INTO PostTag (postId, tagId) VALUES
 (1, 3),
 (2, 1),
 (3, 2);
+

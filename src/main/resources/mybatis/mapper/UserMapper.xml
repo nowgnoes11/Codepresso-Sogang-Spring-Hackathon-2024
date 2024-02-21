@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.codepresso.sns.mapper.UserMapper">
+    <insert id="signup">
+        insert into user(userName, email, password, introduction, occupation, birthday, city)
+        values(#{userName}, #{email}, #{password}, #{introduction}, #{occupation}, #{birthday}, #{city});
+
+    </insert>
+    <select id="getNewOne" resultType="com.codepresso.sns.vo.User">
+        select *
+        from user
+        order by userId desc limit 1;
+    </select>
+    <select id="login"  resultType="com.codepresso.sns.controller.dto.UserLoginResponseDto">
+        select userId, userName, email
+        from user
+        where user.email = #{email} and user.password=#{password}
+    </select>
+    <select id="summary" resultType="com.codepresso.sns.vo.User">
+        select *
+        from user
+        where user.userId = #{id}
+    </select>
+
+</mapper>
