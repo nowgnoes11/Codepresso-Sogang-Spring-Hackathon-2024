@@ -3,11 +3,13 @@ package com.codepresso.sns.Service;
 import com.codepresso.sns.controller.dto.*;
 import com.codepresso.sns.mapper.PostMapper;
 import com.codepresso.sns.vo.Post;
+import com.codepresso.sns.vo.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -25,9 +27,22 @@ public class PostService {
         if (postMapper.checkid(info.getUserId()) == 0) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "404 Not Found");
         }
+
+        String allcontent=info.getContent();
+        String[] contenttags=allcontent.split("#");
+        info.setContent(contenttags[0]);//content만 따로 저장
         postMapper.createPost(info);
-        Post post = postMapper.getNewOne();
-        return post;
+        Post post=postMapper.getNewOne();
+        PostResponseDto answer=new PostResponseDto(post);
+        String name= postMapper.findUserName(post.getPostId());
+        answer.setUserName(name);
+        String[] tags= Arrays.copyOf(contenttags, contenttags.length - 1);
+        Tag temp;
+        List<Tag> list=new ArrayList<>();
+        for(String tag: tags){
+
+        }
+        return answer;
     }
 
     public List<PostResponseDto> findAllPost(int userId) {
@@ -36,16 +51,17 @@ public class PostService {
         }
 
 
-        List<PostResponseDto> list = postMapper.findAllPost();
-        List<Integer> likelist = postMapper.findUserLike(userId);
-        int i = 0;
-        for (PostResponseDto post : list) {
-            if (i >= likelist.size()) {
+        List<PostResponseDto> list= postMapper.findAllPost();
+        List<Integer> likelist=postMapper.findUserLike(userId);
+        int i=0;
+        for(PostResponseDto post: list){
+            if(i>=likelist.size()){
                 break;
-            } else if (likelist.get(i) == post.getPostId()) {
-                post.setLikedByUser(true);
-            } else {
             }
+            else if(likelist.get(i)==post.getPostId()){
+                post.setLikedByUser(true);
+            }
+            else{}
         }
         return list;
     }

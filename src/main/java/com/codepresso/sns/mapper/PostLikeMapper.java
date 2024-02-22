@@ -10,5 +10,7 @@ public interface PostLikeMapper {
     public int createLike(int postId, int userId);
 
     public int deleteLike(int postId, int userId);
+    public int increaseLike(int postId);
 
+    public int decreaseLike(int postId);
 }

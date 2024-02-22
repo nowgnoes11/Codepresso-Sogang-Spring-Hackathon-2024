@@ -12,5 +12,6 @@
         <mapper resource="mybatis/mapper/CommentMapper.xml"/>
         <mapper resource="mybatis/mapper/PostLikeMapper.xml"/>
         <mapper resource="mybatis/mapper/UserFollowMapper.xml"/>
+        <mapper resource="mybatis/mapper/PostTagMapper.xml"/>
     </mappers>
 </configuration>

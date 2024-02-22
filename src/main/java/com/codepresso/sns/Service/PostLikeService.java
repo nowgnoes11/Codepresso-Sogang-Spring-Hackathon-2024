@@ -15,12 +15,14 @@ public class PostLikeService {
 
     public MessageDto createLike(int postId, PostLikeRequestDto userId){
         postLikeMapper.createLike(postId, userId.getUserId());
+        postLikeMapper.increaseLike(postId);
         MessageDto answer=new MessageDto("Like successfully added to the post.");
         return answer;
     }
 
     public MessageDto deleteLike(int postId, PostLikeRequestDto userId){
         postLikeMapper.deleteLike(postId, userId.getUserId());
+        postLikeMapper.decreaseLike(postId);
         MessageDto answer=new MessageDto("Like successfully deleted from the post.");
         return answer;
     }
