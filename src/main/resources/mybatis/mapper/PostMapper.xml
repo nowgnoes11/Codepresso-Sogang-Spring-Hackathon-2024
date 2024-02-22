@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.codepresso.sns.mapper.PostMapper">
+    <insert id="createPost">
+        insert into post(userId, content)
+        values(#{userId}, #{content});
+    </insert>
+    <select id="checkid" resultType="Integer">
+        select count(*)
+        from user
+        where user.userId=#{id}
+    </select>
+    <select id="getNewOne" resultType="com.codepresso.sns.vo.Post">
+        select *
+        from post
+        order by postId desc limit 1;
+    </select>
+    <select id="findAllPost" resultType="com.codepresso.sns.controller.dto.PostResponseDto">
+        select post.postId, post.userId, user.userName, post.content, post.createdAt, post.updatedAt
+        from post inner join user on post.userId=user.userId
+    </select>
+    <select id="findUserName" resultType="string">
+        select user.userName
+        from user
+        where user.userId=#{id}
+    </select>
+    <select id="findPostById" resultType="com.codepresso.sns.controller.dto.PostSimpleDto">
+        select post.postId, post.content, post.createdAt, post.updatedAt
+        from post
+        where post.userId = #{id}
+    </select>
+    <update id="updatePost">
+        update post
+        set content=#{content}
+        where postId=#{postId}
+    </update>
+    <select id="findPost" resultType="com.codepresso.sns.vo.Post">
+        select *
+        from post
+        where postId=#{postId}
+    </select>
+    <delete id="deletePost">
+        delete from post
+        where postId=#{postId}
+    </delete>
+    <select id="findUserLike" resultType="Integer">
+        select post.postId
+        from postLike inner join post on postLike.postId=post.postId
+        where postLike.userId=#{userId}
+    </select>
+    <select id="countLikes" resultType="com.codepresso.sns.controller.dto.PostLikeCountDto">
+        select postId, count(*)
+        from postLike
+        group by postId;
+    </select>
+</mapper>
