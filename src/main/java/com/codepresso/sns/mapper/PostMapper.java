@@ -13,6 +13,8 @@ public interface PostMapper {
     public void createPost(PostCreateDto info);
     int checkid(int id);
 
+    int checkpost(int postId);
+
     public List<PostResponseDto> findAllPost();
 
     public List<PostSimpleDto> findPostById(int id);

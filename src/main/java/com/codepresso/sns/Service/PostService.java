@@ -70,6 +70,10 @@ public class PostService {
     }
 
     public List<PostLikeResponseDto> findAllPostByLike(int userId) {
+        if (postMapper.checkid(userId) == 0) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "404 Not Found");
+        }
+
         List<PostResponseDto> responselist = postMapper.findAllPost();
         List<Integer> likelist = postMapper.findUserLike(userId);
         List<PostLikeResponseDto> list = new ArrayList<>();
@@ -121,6 +125,10 @@ public class PostService {
     }
 
     public void deletePost(int postId) {
+        if (postMapper.checkpost(postId) == 0) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "404 Not Found");
+        }
+
         postMapper.deletePost(postId);
     }
 

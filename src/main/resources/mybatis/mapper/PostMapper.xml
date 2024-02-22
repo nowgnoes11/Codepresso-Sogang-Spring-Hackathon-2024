@@ -13,6 +13,11 @@
         from user
         where user.userId=#{id}
     </select>
+    <select id="checkpost" resultType="Integer">
+        select count(*)
+        from post
+        where post.postId=#{postId}
+    </select>
     <select id="getNewOne" resultType="com.codepresso.sns.vo.Post">
         select *
         from post
