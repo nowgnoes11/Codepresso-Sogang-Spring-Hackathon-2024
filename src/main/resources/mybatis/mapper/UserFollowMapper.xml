@@ -8,4 +8,19 @@
         insert into userFollow (followerId, followingId)
         values(#{followerId}, #{followingId})
     </insert>
+    <delete id="deleteFollow">
+        delete from userFollow
+        where followerId=#{followerId} and followingId=#{followingId}
+    </delete>
+    <select id="getmyfollowing" resultType="com.codepresso.sns.controller.dto.UserFollowRespondDto">
+        select userFollow.followingId, user.userName, user.occupation
+        from userFollow inner join user on userFollow.followingId=user.userId
+        where userFollow.followerId=#{userId}
+    </select>
+    <select id="getmyfollower" resultType="com.codepresso.sns.controller.dto.UserFollowRespondDto">
+        select userFollow.followerId, user.userName, user.occupation
+        from userFollow inner join user on userFollow.followerId=user.userId
+        where userFollow.followingId=#{userId}
+    </select>
+
 </mapper>
