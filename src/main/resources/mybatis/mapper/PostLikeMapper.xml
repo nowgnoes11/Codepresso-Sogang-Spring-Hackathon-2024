@@ -8,6 +8,16 @@
         insert into postLike(postId, userId)
         values(#{postId}, #{userId});
     </insert>
+    <select id="checkpost" resultType="Integer">
+        select count(*)
+        from postLike
+        where postLike.postId=#{postId}
+    </select>
+    <select id="checklike" resultType="Integer">
+        select count(*)
+        from postLike
+        where postLike.postId=#{postId} and postLike.userId=#{userId}
+    </select>
     <update id="increaseLike">
         update post
         set likeCount=likeCount+1

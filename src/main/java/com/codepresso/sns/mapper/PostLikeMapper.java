@@ -9,6 +9,10 @@ import java.util.List;
 public interface PostLikeMapper {
     public int createLike(int postId, int userId);
 
+    int checkpost(int postId);
+
+    int checklike(int postId, int userId);
+
     public int deleteLike(int postId, int userId);
     public int increaseLike(int postId);
 
