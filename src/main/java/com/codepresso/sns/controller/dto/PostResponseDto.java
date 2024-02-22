@@ -32,9 +32,10 @@ public class PostResponseDto {
         List<Tag> tagList=new ArrayList<>();
     }
 
-    public PostResponseDto(Post post) {
+    public PostResponseDto(Post post, String name) {
         this.postId = post.getPostId();
         this.userId = post.getUserId();
+        this.userName=name;
         this.content = post.getContent();
         this.createdAt = post.getCreatedAt();
         this.updatedAt = post.getUpdatedAt();

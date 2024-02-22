@@ -63,6 +63,6 @@
     <select id="getNewTag" resultType="com.codepresso.sns.vo.Tag">
         select *
         from tag
-        order by tagId limit 1
+        order by tagId desc limit 1
     </select>
 </mapper>

@@ -27,22 +27,25 @@ public class PostService {
         if (postMapper.checkid(info.getUserId()) == 0) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "404 Not Found");
         }
-
         String allcontent=info.getContent();
         String[] contenttags=allcontent.split("#");
         info.setContent(contenttags[0]);//content만 따로 저장
         postMapper.createPost(info);
         Post post=postMapper.getNewOne();
-        PostResponseDto answer=new PostResponseDto(post);
-        String name= postMapper.findUserName(post.getPostId());
-        answer.setUserName(name);
-        String[] tags= Arrays.copyOf(contenttags, contenttags.length - 1);
+        String name= postMapper.findUserName(post.getUserId());
+        PostResponseDto answer=new PostResponseDto(post.getPostId(), post.getUserId(), name, post.getContent(),post.getCreatedAt(), post.getUpdatedAt());
+        int i=0;
         Tag temp;
         List<Tag> list=new ArrayList<>();
-        for(String tag: tags){
-            postMapper.createTag(tag);
-            temp=postMapper.getNewTag();
-            list.add(temp);
+        for(String tag: contenttags){
+            if(i==0){
+                ++i;
+            }
+            else {
+                postMapper.createTag(tag);
+                temp = postMapper.getNewTag();
+                list.add(temp);
+            }
         }
         answer.setTagList(list);
         return answer;
