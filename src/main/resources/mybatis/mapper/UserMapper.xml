@@ -4,6 +4,31 @@
 
 
 <mapper namespace="com.codepresso.sns.mapper.UserMapper">
+    <select id="checkuser" resultType="Integer">
+        select count(*)
+        from user
+        where user.email=#{email}
+    </select>
+    <select id="checklogin" resultType="Integer">
+        select count(*)
+        from user
+        where user.email=#{email}
+    </select>
+    <select id="checkpw" resultType="Integer">
+        select count(*)
+        from user
+        where user.password=#{password}
+    </select>
+    <select id="checkid" resultType="Integer">
+        select count(*)
+        from user
+        where user.userId=#{id}
+    </select>
+    <select id="checkcur" resultType="Integer">
+        select count(*)
+        from user
+        where user.password=#{currentPassword}
+    </select>
     <insert id="signup">
         insert into user(userName, email, password, introduction, occupation, birthday, city)
         values(#{userName}, #{email}, #{password}, #{introduction}, #{occupation}, #{birthday}, #{city});
@@ -19,10 +44,23 @@
         from user
         where user.email = #{email} and user.password=#{password}
     </select>
-    <select id="summary" resultType="com.codepresso.sns.vo.User">
+    <select id="getInfo" resultType="com.codepresso.sns.vo.User">
         select *
         from user
         where user.userId = #{id}
     </select>
+    <update id="update">
+        update user
+        set userName=ISNULL(#{info.userName},userName),
+            introduction=ISNULL(#{info.introduction}, introduction),
+            occupation=ISNULL(#{info.occupation},occupation),
+            city=ISNULL(#{info.city}, city)
+        where user.userId=#{id}
+    </update>
+    <update id="updatePassword">
+        update user
+        set password=#{newPassword}
+        where user.userId=#{id} and user.password=#{currentPassword}
+    </update>
 
 </mapper>

@@ -8,5 +8,9 @@
 
     <mappers>
         <mapper resource="mybatis/mapper/UserMapper.xml"/>
+        <mapper resource="mybatis/mapper/PostMapper.xml"/>
+        <mapper resource="mybatis/mapper/CommentMapper.xml"/>
+        <mapper resource="mybatis/mapper/PostLikeMapper.xml"/>
+        <mapper resource="mybatis/mapper/UserFollowMapper.xml"/>
     </mappers>
 </configuration>

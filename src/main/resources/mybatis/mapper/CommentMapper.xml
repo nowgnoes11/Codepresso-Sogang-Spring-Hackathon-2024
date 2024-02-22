@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.codepresso.sns.mapper.CommentMapper">
+        <insert id="createComment">
+            insert into comment(postId, userId, comment)
+            values(#{postId}, #{requestDto.userId}, #{requestDto.comment})
+        </insert>
+
+        <select id="getNewOne" resultType="com.codepresso.sns.vo.Comment">
+            select *
+            from comment
+            order by commentId desc limit 1
+        </select>
+
+        <select id="findAllComment" resultType="com.codepresso.sns.vo.Comment">
+            select *
+            from comment
+            where postId=#{postId}
+        </select>
+</mapper>

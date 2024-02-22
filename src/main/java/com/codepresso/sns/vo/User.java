@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Data
 @Getter
@@ -18,14 +19,14 @@ public class User {
     int followerCount;
     String introduction;
     String occupation ;
-    LocalDateTime birthday;
+    Date birthday;
     String city;
     LocalDateTime createdAt ;
     LocalDateTime updatedAt;
 
     public User(int userId, String userName, String email, String password, int postCount, int liekCount,
                 int followingCount, int followerCount, String introduction, String occupation,
-                LocalDateTime birthday, String city, LocalDateTime createdAt, LocalDateTime updatedAt) {
+                Date birthday, String city, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.userId = userId;
         this.userName = userName;
         this.email = email;

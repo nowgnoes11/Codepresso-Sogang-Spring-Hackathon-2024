@@ -3,6 +3,7 @@ package com.codepresso.sns.controller.dto;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Getter
 public class UserResponseDto {
@@ -11,10 +12,10 @@ public class UserResponseDto {
     private String email ;
     private String introduction;
     private String occupation ;
-    private LocalDateTime birthday;
+    private Date birthday;
     private String city;
 
-    public UserResponseDto(int userId, String username, String email, String introduction, String occupation, LocalDateTime birthday, String city) {
+    public UserResponseDto(int userId, String username, String email, String introduction, String occupation, Date birthday, String city) {
         this.userId = userId;
         this.username = username;
         this.email = email;

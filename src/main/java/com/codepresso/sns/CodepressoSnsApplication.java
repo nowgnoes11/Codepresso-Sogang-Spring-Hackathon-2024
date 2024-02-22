@@ -9,5 +9,4 @@ public class CodepressoSnsApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CodepressoSnsApplication.class, args);
 	}
-
 }
