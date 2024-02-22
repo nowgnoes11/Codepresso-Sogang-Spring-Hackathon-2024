@@ -27,6 +27,7 @@ public class PostService {
         if (postMapper.checkid(info.getUserId()) == 0) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "404 Not Found");
         }
+
         String allcontent=info.getContent();
         String[] contenttags=allcontent.split("#");
         info.setContent(contenttags[0]);//content만 따로 저장
