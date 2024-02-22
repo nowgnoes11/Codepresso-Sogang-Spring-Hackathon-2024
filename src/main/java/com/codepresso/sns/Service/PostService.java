@@ -39,8 +39,11 @@ public class PostService {
         Tag temp;
         List<Tag> list=new ArrayList<>();
         for(String tag: tags){
-
+            postMapper.createTag(tag);
+            temp=postMapper.getNewTag();
+            list.add(temp);
         }
+        answer.setTagList(list);
         return answer;
     }
 

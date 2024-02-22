@@ -56,4 +56,13 @@
         from postLike
         group by postId;
     </select>
+    <insert id="createTag">
+        insert into tag(tagName)
+        values(#{tag});
+    </insert>
+    <select id="getNewTag" resultType="com.codepresso.sns.vo.Tag">
+        select *
+        from tag
+        order by tagId limit 1
+    </select>
 </mapper>

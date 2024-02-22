@@ -2,6 +2,7 @@ package com.codepresso.sns.mapper;
 
 import com.codepresso.sns.controller.dto.*;
 import com.codepresso.sns.vo.Post;
+import com.codepresso.sns.vo.Tag;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -26,4 +27,6 @@ public interface PostMapper {
     public List<Integer> findUserLike(int userId);
 
     public List<PostLikeCountDto> countLikes();
+    public int createTag(String tag);
+    public Tag getNewTag();
 }
