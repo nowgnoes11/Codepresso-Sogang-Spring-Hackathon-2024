@@ -28,18 +28,20 @@ public class PostService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "404 Not Found");
         }
 
-        String allcontent = info.getContent();
-        String[] contenttags = allcontent.split("#");
+        String allcontent=info.getContent();
+        String[] contenttags=allcontent.split("#");
         info.setContent(contenttags[0]);//content만 따로 저장
         postMapper.createPost(info);
-        Post post = postMapper.getNewOne();
-        PostResponseDto answer = new PostResponseDto(post);
-        String name = postMapper.findUserName(post.getPostId());
+        Post post=postMapper.getNewOne();
+        PostResponseDto answer=new PostResponseDto(post);
+        String name= postMapper.findUserName(post.getPostId());
         answer.setUserName(name);
-        String[] tags = Arrays.copyOf(contenttags, contenttags.length - 1);
+        String[] tags= Arrays.copyOf(contenttags, contenttags.length - 1);
         Tag temp;
-        List<Tag> list = new ArrayList<>();
+        List<Tag> list=new ArrayList<>();
+        for(String tag: tags){
 
+        }
         return answer;
     }
 
@@ -49,16 +51,17 @@ public class PostService {
         }
 
 
-        List<PostResponseDto> list = postMapper.findAllPost();
-        List<Integer> likelist = postMapper.findUserLike(userId);
-        int i = 0;
-        for (PostResponseDto post : list) {
-            if (i >= likelist.size()) {
+        List<PostResponseDto> list= postMapper.findAllPost();
+        List<Integer> likelist=postMapper.findUserLike(userId);
+        int i=0;
+        for(PostResponseDto post: list){
+            if(i>=likelist.size()){
                 break;
-            } else if (likelist.get(i) == post.getPostId()) {
-                post.setLikedByUser(true);
-            } else {
             }
+            else if(likelist.get(i)==post.getPostId()){
+                post.setLikedByUser(true);
+            }
+            else{}
         }
         return list;
     }
