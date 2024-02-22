@@ -8,7 +8,7 @@
         insert into tag(tagName)
         values(#{tag});
     </insert>
-    <select id="getNewOne">
+    <select id="getNewOne" resultType="com.codepresso.sns.vo.Tag">
         select *
         from tag
         order by tagId limit 1

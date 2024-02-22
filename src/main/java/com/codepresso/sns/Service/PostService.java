@@ -20,14 +20,13 @@ public class PostService {
         this.postMapper = postMapper;
     }
 
-    public Post createPost(PostCreateDto info) {
+    public PostResponseDto createPost(PostCreateDto info) {
         if (info.getUserId() == 0 || info.getContent() == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "400 Bad Request");
         }
         if (postMapper.checkid(info.getUserId()) == 0) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "404 Not Found");
         }
-
         String allcontent=info.getContent();
         String[] contenttags=allcontent.split("#");
         info.setContent(contenttags[0]);//content만 따로 저장
